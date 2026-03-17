@@ -142,7 +142,7 @@ public class MainApp {
                                     break;
                                 }
 
-                                // Inisialisasi objek Transaksi dan panggil metode TambahTransaksi
+                                //memanggil methiod TambahTransaksi untuk membuat transaksi baru
                                 transaksi = new Transaksi();
                                 transaksi.TambahTransaksi(barang, pembeli, jumlah); 
 

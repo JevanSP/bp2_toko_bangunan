@@ -9,6 +9,7 @@ class Transaksi {
         System.out.println("Transaksi berhasil dibuat");
     }
     public void TambahTransaksi(Barang b, Pembeli p, int j) {
+        // id++ selalu bertambah saat melakukan transaksi
         idTransaksi = id++;
         barang = b;
         pembeli = p;
@@ -22,6 +23,7 @@ class Transaksi {
         System.out.println("Jumlah: " + jumlah);
         System.out.println("Total Harga: " + totalHarga);
     }
+    // getter untuk menampilkan informasi transaksi
     public int getIdTransaksi() {
         return idTransaksi;
     }
