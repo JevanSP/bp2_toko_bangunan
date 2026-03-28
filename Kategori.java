@@ -9,8 +9,4 @@ public class Kategori {
         return namaKategori;
     }
     
-    public void setNamaKategori(String namaKategori) {
-        this.namaKategori = namaKategori;
-    }
-
 }
