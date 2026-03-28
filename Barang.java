@@ -3,10 +3,12 @@ class Barang {
     private String nama_barang;
     private int harga;
     private int stok;
+    private Kategori kategori;
 
-    public Barang(int kd, String nm, int hg, int st) {
+    public Barang(int kd, String nm, int hg, int st, Kategori kt) {
         kode_barang = kd;
         nama_barang = nm;
+        kategori = kt;
         harga = hg;
         stok = st;
     }
@@ -40,6 +42,7 @@ class Barang {
     public void tampilkanBarang() {
         System.out.println("Kode Barang: " + kode_barang);
         System.out.println("Nama Barang: " + nama_barang);
+        System.out.println("Kategori: " + kategori.getNamaKategori());
         System.out.println("Harga: " + harga);
         System.out.println("Stok: " + stok);
     }
@@ -58,14 +61,7 @@ class Barang {
         stok += jumlah;
         System.out.println("Stok barang " + nama_barang + " berhasil ditambah. Stok sekarang: " + stok);
     }
-    // method untuk hapus barang
-    public void hapusBarang() {
-        kode_barang = 0;
-        nama_barang = "";
-        harga = 0;
-        stok = 0;
-        System.out.println("Barang berhasil dihapus.");
-    }
+    
     // method untuk update barang
     public void updateBarang(int kd, String nm, int hg, int st) {
         kode_barang = kd;

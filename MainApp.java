@@ -10,12 +10,20 @@ public class MainApp {
         ArrayList<Pembeli> daftarPembeli = new ArrayList<>();
         ArrayList<Transaksi> daftarTransaksi = new ArrayList<>();
 
+
+        // Membuat daftar kategori dengan menggunakan ArrayList untuk menyimpan banyak kategori
+        ArrayList<Kategori> daftarKategori = new ArrayList<>();
+        daftarKategori.add(new Kategori("Cat"));
+        daftarKategori.add(new Kategori("Pipa"));
+        daftarKategori.add(new Kategori("Semen"));
+        daftarKategori.add(new Kategori("Bata"));
+        daftarKategori.add(new Kategori("Tekiro"));
         int pilihan_user, pilihan;
         String role = "";
         boolean isRunning = true;
 
         while (isRunning) {
-            System.out.println("\n=== SISTEM POS TOKO ===");
+            System.out.println("\n=== SISTEM POS TOKO BANGUNAN ===");
             System.out.println("1. Admin");
             System.out.println("2. Kasir");
             System.out.println("3. Keluar");
@@ -39,9 +47,9 @@ public class MainApp {
                 System.out.println("2. Hapus Barang (Admin)");
                 System.out.println("3. Tampilkan Semua Barang");
                 System.out.println("4. Tambah Pembeli (Kasir)");
-                System.out.println("6. Transaksi Baru (Kasir)");
-                System.out.println("7. Riwayat Transaksi");
-                System.out.println("8. Log Out");
+                System.out.println("5. Transaksi Baru (Kasir)");
+                System.out.println("6. Riwayat Transaksi");
+                System.out.println("7. Log Out");
                 System.out.print("Pilihan: ");
                 pilihan = input.nextInt();
                 input.nextLine();
@@ -53,12 +61,19 @@ public class MainApp {
                             int kd = input.nextInt();
                             System.out.print("Nama: ");
                             String nm = input.next();
+                            System.out.println("Pilih Kategori:");
+                            for (int i = 0; i < daftarKategori.size(); i++) {
+                                System.out.println(i + ". " + daftarKategori.get(i).getNamaKategori());
+                            }
+                            System.out.print("Masukkan index kategori: ");
+                            int pilKat = input.nextInt();
                             System.out.print("Harga: ");
                             int hg = input.nextInt();
                             System.out.print("Stok: ");
                             int st = input.nextInt();
-                            daftarBarang.add(new Barang(kd, nm, hg, st));
-                            System.out.println("Barang berhasil disimpan ke list.");
+                            Kategori katTerpilih = daftarKategori.get(pilKat);
+                            daftarBarang.add(new Barang(kd, nm, hg, st, katTerpilih));
+                            System.out.println("Barang dengan kategori " + katTerpilih.getNamaKategori() + " berhasil disimpan.");
                         } else
                             System.out.println("Akses Ditolak!");
                         break;
@@ -132,10 +147,9 @@ public class MainApp {
                             Barang bTerpilih = daftarBarang.get(idxB);
                             if (bTerpilih.getStok() >= jml) {
                                 Transaksi t = new Transaksi();
-                                // Menambah transaksi barang terpilih akan menghitung jumlah yang dibeli dan
-                                // stok akan dikurangi
+                                // Menambah transaksi barang terpilih akan menghitung jumlah yang dibeli dan stok akan dikurangi
                                 t.TambahTransaksi(bTerpilih, daftarPembeli.get(idxP), jml);
-                                bTerpilih.setStok(bTerpilih.getStok() - jml);
+                                bTerpilih.kurangiStok(jml);
                                 daftarTransaksi.add(t);
                                 t.cetakTransaksi();
                             } else
