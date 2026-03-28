@@ -10,7 +10,6 @@ public class MainApp {
         ArrayList<Pembeli> daftarPembeli = new ArrayList<>();
         ArrayList<Transaksi> daftarTransaksi = new ArrayList<>();
 
-
         // Membuat daftar kategori dengan menggunakan ArrayList untuk menyimpan banyak kategori
         ArrayList<Kategori> daftarKategori = new ArrayList<>();
         daftarKategori.add(new Kategori("Cat"));
@@ -45,11 +44,12 @@ public class MainApp {
                 System.out.println("\n-- Menu " + role + " --");
                 System.out.println("1. Tambah Barang (Admin)");
                 System.out.println("2. Hapus Barang (Admin)");
-                System.out.println("3. Tampilkan Semua Barang");
-                System.out.println("4. Tambah Pembeli (Kasir)");
-                System.out.println("5. Transaksi Baru (Kasir)");
-                System.out.println("6. Riwayat Transaksi");
-                System.out.println("7. Log Out");
+                System.out.println("3. Update Barang (Admin)");
+                System.out.println("4. Tampilkan Semua Barang");
+                System.out.println("5. Tambah Pembeli (Kasir)");
+                System.out.println("6. Transaksi Baru (Kasir)");
+                System.out.println("7. Riwayat Transaksi");
+                System.out.println("8. Log Out");
                 System.out.print("Pilihan: ");
                 pilihan = input.nextInt();
                 input.nextLine();
@@ -74,8 +74,9 @@ public class MainApp {
                             Kategori katTerpilih = daftarKategori.get(pilKat);
                             daftarBarang.add(new Barang(kd, nm, hg, st, katTerpilih));
                             System.out.println("Barang dengan kategori " + katTerpilih.getNamaKategori() + " berhasil disimpan.");
-                        } else
+                        } else {
                             System.out.println("Akses Ditolak!");
+                        }
                         break;
 
                     case 2: // Hapus Barang
@@ -96,7 +97,32 @@ public class MainApp {
                             System.out.println("Barang dengan kode " + kdHapus + " tidak ditemukan.");
                         break;
 
-                    case 3: // Tampilkan Barang
+                    case 3: // Update Barang
+                        System.out.println("Masukkan Kode Barang yang ingin diupdate: ");
+                        int kdUpdate = input.nextInt();
+                        // Mencari barang dengan kode yang diinputkan untuk diupdate
+                        boolean foundUpdate = false;
+                        for (int i = 0; i < daftarBarang.size(); i++) {
+                            if (daftarBarang.get(i).getKode_barang() == kdUpdate) {
+                                System.out.print("Nama Baru: ");
+                                String nmBaru = input.next();
+                                System.out.print("Harga Baru: ");
+                                int hgBaru = input.nextInt();
+                                System.out.print("Stok Baru: ");
+                                int stBaru = input.nextInt();
+                                daftarBarang.get(i).setNama_barang(nmBaru);
+                                daftarBarang.get(i).setHarga(hgBaru);
+                                daftarBarang.get(i).setStok(stBaru);
+                                System.out.println("Barang dengan kode " + kdUpdate + " berhasil diupdate.");
+                                foundUpdate = true;
+                            }
+                            else {
+                                System.out.println("Barang dengan kode " + kdUpdate + " tidak ditemukan.");
+                            }
+                            break;
+                        }
+
+                    case 4: // Tampilkan Barang
                         System.out.println("--- Daftar Barang ---");
                         if (daftarBarang.isEmpty())
                             System.out.println("Kosong.");
@@ -107,7 +133,7 @@ public class MainApp {
                         }
                         break;
 
-                    case 4: // Tambah Pembeli
+                    case 5: // Tambah Pembeli
                         if (role.equals("Kasir")) {
                             System.out.print("ID Pembeli: ");
                             int idp = input.nextInt();
@@ -120,7 +146,7 @@ public class MainApp {
                             System.out.println("Akses Ditolak!");
                         break;
 
-                    case 5: // Transaksi
+                    case 6: // Transaksi
                         if (role.equals("Kasir")) {
                             if (daftarBarang.isEmpty() || daftarPembeli.isEmpty()) {
                                 System.out.println("Data barang/pembeli belum ada!");
@@ -147,7 +173,8 @@ public class MainApp {
                             Barang bTerpilih = daftarBarang.get(idxB);
                             if (bTerpilih.getStok() >= jml) {
                                 Transaksi t = new Transaksi();
-                                // Menambah transaksi barang terpilih akan menghitung jumlah yang dibeli dan stok akan dikurangi
+                                // Menambah transaksi barang terpilih akan menghitung jumlah yang dibeli dan
+                                // stok akan dikurangi
                                 t.TambahTransaksi(bTerpilih, daftarPembeli.get(idxP), jml);
                                 bTerpilih.kurangiStok(jml);
                                 daftarTransaksi.add(t);
@@ -158,14 +185,14 @@ public class MainApp {
                             System.out.println("Akses Ditolak!");
                         break;
 
-                    case 6: // Riwayat Transaksi
+                    case 7: // Riwayat Transaksi
                         System.out.println("--- Riwayat Transaksi ---");
                         // Melakukan perulanagan untuk menampilkan semua transaksi yang sudah dilakukan
                         for (Transaksi t : daftarTransaksi)
                             t.cetakTransaksi();
                         break;
 
-                    case 7:// log out
+                    case 8:// log out
                            // Keluar dari menu dan kembali ke pemilihan role
                         isLoggedIn = false;
                         break;
