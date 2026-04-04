@@ -1,4 +1,3 @@
-// Nama file harus User.java
 public class User {
     protected String username;
     protected String sandi;
@@ -16,8 +15,7 @@ public class User {
         return username;
     }
 }
-
-// Class Admin (Tanpa 'public' karena digabung)
+// Pewarisan untuk Admin dan Kasir
 class Admin extends User {
     public Admin(String u, String s) {
         super(u, s);
@@ -28,7 +26,6 @@ class Admin extends User {
     }
 }
 
-// Class Kasir (Tanpa 'public' karena digabung)
 class Kasir extends User {
     public Kasir(String u, String s) {
         super(u, s);
