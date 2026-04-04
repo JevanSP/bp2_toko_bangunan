@@ -46,6 +46,9 @@ class Barang {
         System.out.println("Harga: " + harga);
         System.out.println("Stok: " + stok);
     }
+    public void tmplBarangTrx() {
+        System.out.println("Kode Barang: " + kode_barang + ", Nama Barang: " + nama_barang + ", Harga: " + harga + ", Stok: " + stok);
+    }
     // method untuk mengurangi stok barang setelah transaksi
     public void kurangiStok(int jumlah) {
         // validasi untuk memastikan stok tidak menjadi negatif
